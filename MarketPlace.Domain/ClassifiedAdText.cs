@@ -8,7 +8,7 @@ public record class ClassifiedAdText
 
     public static ClassifiedAdText FromString(string title) => new ClassifiedAdText(title);
 
-    private ClassifiedAdText(string value)
+    internal ClassifiedAdText(string value)
     {
         if (value.Length > 1000)
         {
@@ -16,4 +16,7 @@ public record class ClassifiedAdText
         }
         _value = value;
     }
+
+    public static implicit operator string(ClassifiedAdText self) => self.Value;
+
 }

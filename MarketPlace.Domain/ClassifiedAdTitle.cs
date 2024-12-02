@@ -20,7 +20,7 @@ public record class ClassifiedAdTitle
           supportedTagsReplaced, "<.*?>", string.Empty));
     }
 
-    private ClassifiedAdTitle(string value)
+    internal ClassifiedAdTitle(string value)
     {
         if (value.Length > 100)
         {
@@ -28,4 +28,6 @@ public record class ClassifiedAdTitle
         }
         _value = value;
     }
+
+    public static implicit operator string(ClassifiedAdTitle self) => self.Value;
 }

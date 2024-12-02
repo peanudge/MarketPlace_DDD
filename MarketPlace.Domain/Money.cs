@@ -37,7 +37,7 @@ public record class Money
         Currency = currency;
     }
 
-    private Money(decimal amount, CurrencyDetails currency)
+    internal Money(decimal amount, CurrencyDetails currency)
     {
         Amount = amount;
         Currency = currency;
