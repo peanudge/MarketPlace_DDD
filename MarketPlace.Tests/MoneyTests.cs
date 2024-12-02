@@ -33,4 +33,46 @@ public class MoneyTests
         var banknote = Money.FromDecimal(5, "EUR", CurrencyLookup);
         Assert.Equal(banknote, coin1 + coin2 + coin3);
     }
+
+    [Fact]
+    public void Unused_currency_should_not_be_allowed()
+    {
+        Assert.Throws<ArgumentException>(() => Money.FromDecimal(100, "DEM", CurrencyLookup));
+    }
+
+    [Fact]
+    public void Unknown_currency_should_not_be_allowed()
+    {
+        Assert.Throws<ArgumentException>(() => Money.FromDecimal(100, "WHAT?", CurrencyLookup));
+    }
+
+    [Fact]
+    public void Throw_when_too_many_decimal_places()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => Money.FromDecimal(100.123m, "EUR", CurrencyLookup));
+    }
+
+    [Fact]
+    public void Throws_on_adding_different_currencies()
+    {
+        var firstAmount = Money.FromDecimal(5, "USD",
+        CurrencyLookup);
+        var secondAmount = Money.FromDecimal(5, "EUR",
+        CurrencyLookup);
+        Assert.Throws<CurrencyMismatchException>(() =>
+            firstAmount + secondAmount
+    );
+    }
+    [Fact]
+    public void Throws_on_substracting_different_currencies()
+    {
+        var firstAmount = Money.FromDecimal(5, "USD",
+        CurrencyLookup);
+        var secondAmount = Money.FromDecimal(5, "EUR",
+        CurrencyLookup);
+        Assert.Throws<CurrencyMismatchException>(() =>
+            firstAmount - secondAmount
+        );
+    }
 }

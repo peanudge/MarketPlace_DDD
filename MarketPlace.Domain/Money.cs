@@ -16,8 +16,7 @@ public record class Money
         if (string.IsNullOrEmpty(currencyCode))
         {
             throw new ArgumentNullException(
-                nameof(currencyCode),
-                "Currency code must be specified");
+                nameof(currencyCode), "Currency code must be specified");
         }
 
         var currency = currencyLookup.FindCurrency(currencyCode);
@@ -71,12 +70,12 @@ public record class Money
     public static Money operator +(Money summand1, Money summand2) => summand1.Add(summand2);
 
     public static Money operator -(Money minuend, Money subtrahend) => minuend.Subtract(subtrahend);
+}
 
-    public class CurrencyMismatchException : Exception
+public class CurrencyMismatchException : Exception
+{
+    public CurrencyMismatchException(string message) :
+      base(message)
     {
-        public CurrencyMismatchException(string message) :
-          base(message)
-        {
-        }
     }
 }
