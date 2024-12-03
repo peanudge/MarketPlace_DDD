@@ -12,16 +12,16 @@ public class ClassifiedAd : Entity
     public ClassifiedAdState State { get; private set; }
     public UserId? ApprovedBy { get; private set; }
 
+    // INFO: Apply(Event object) will handle initializing Id, OwerId.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public ClassifiedAd(ClassifiedAdId id, UserId ownerId)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {
         Apply(new Events.ClassifiedAdCreated
         {
             Id = id,
             OwnerId = ownerId
         });
-
-        Id = id;
-        OwnerId = ownerId;
     }
 
     public void SetTitle(ClassifiedAdTitle title)
