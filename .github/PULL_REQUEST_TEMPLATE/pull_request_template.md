@@ -1,7 +1,3 @@
 # Summary
 
-# Result
-
-# Tests
-
-# References
+Multi PR Template
